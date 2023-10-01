@@ -1,60 +1,40 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel
-from random import randint
-
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QMessageBox, QRadioButton
 app = QApplication([])
-win = QWidget()
-win.setWindowTitle("Лотерея")
-win.resize(400, 400)
-win.move(100, 100)
+main_win = QWidget()
+main_win.setWindowTitle("Конкурс від Crazy People")
+main_win.resize(400, 200)
 
-text=QLabel(win)
-text.setText("Натисни, щоб взяти участь")
-text.move(70, 10)
+question = QLabel(main_win)
+question.setText("В якому році канал отримав золоту кнопку від YouTube?")
+question.move(10, 10)
 
-text2 = QLabel(win)
-text2.setText("?")
-text2.move(190, 70)
+btn_1 = QRadioButton(main_win)
+btn_1.setText("2005")
+btn_1.move(100, 60)
 
-text3 = QLabel(win)
-text3.setText("?")
-text3.move(190, 100)
+btn_2 = QRadioButton(main_win)
+btn_2.setText("2010")
+btn_2.move(200, 60)
 
+btn_3 = QRadioButton(main_win)
+btn_3.setText("2015")
+btn_3.move(100, 120)
 
-
-
-
-
-
-
-
-
-button = QPushButton(win)
-button.setText("Випробувати удачу")
-button.move(140, 130)
-
-
-
-
-
-
-
+btn_4 = QRadioButton(main_win)
+btn_4.setText("2020")
+btn_4.move(200, 120)
 
 def show_win():
-    number = randint(1, 100)
-    number1= randint(1, 100)
-    text2.setText(str(number))
-
-    text3.setText(str(number1))
-
-    if number == number1:
-        text.setText("Ви виграли! Зіграйте знову")
-    elif number != number1:
-        text.setText("Ви програли! Зіграйте знову")
-
-button.clicked.connect(show_win)
-
-
-
-
-win.show()
+    win = QMessageBox()
+    win.setText("Правильно! Ви виграли гіроскутер")
+    win.exec_()
+def show_lose():
+    lose = QMessageBox()
+    lose.setText("Ні, в 2015 році. Ви виграли фірмовий плакат")
+    lose.exec_()
+btn_3.clicked.connect(show_win)
+btn_1.clicked.connect(show_lose)
+btn_2.clicked.connect(show_lose)
+btn_4.clicked.connect(show_lose)
+main_win.show()
 app.exec_()
